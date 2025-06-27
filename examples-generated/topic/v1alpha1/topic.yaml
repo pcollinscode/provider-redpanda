@@ -1,0 +1,78 @@
+apiVersion: topic.convoy.com/v1alpha1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: topic/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    allowDeletion: true
+    clusterApiUrl: ${redpanda_cluster.test.cluster_api_url}
+    partitionCount: ${var.partition_count}
+    replicationFactor: ${var.replication_factor}
+
+---
+
+apiVersion: acl.convoy.com/v1alpha1
+kind: ACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: topic/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    clusterApiUrl: ${redpanda_cluster.test.cluster_api_url}
+    host: '*'
+    operation: READ
+    permissionType: ALLOW
+    principal: ${var.user_name}
+    resourceName: ${var.topic_name}
+    resourcePatternType: LITERAL
+    resourceType: TOPIC
+
+---
+
+apiVersion: cluster.convoy.com/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: topic/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    allowDeletion: true
+    cloudProvider: ${var.cloud_provider}
+    clusterType: dedicated
+    connectionType: public
+    networkId: ${redpanda_network.test.id}
+    region: ${var.region}
+    resourceGroupId: ${redpanda_resource_group.test.id}
+    tags:
+      key: value
+    throughputTier: ${var.throughput_tier}
+    zones: ${var.zones}
+
+---
+
+apiVersion: user.convoy.com/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: topic/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    clusterApiUrl: ${redpanda_cluster.test.cluster_api_url}
+    mechanism: ${var.mechanism}
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system

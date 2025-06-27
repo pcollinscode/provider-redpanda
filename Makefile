@@ -1,8 +1,8 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME ?= upjet-provider-template
-PROJECT_REPO ?= github.com/upbound/$(PROJECT_NAME)
+PROJECT_NAME ?= provider-redpanda
+PROJECT_REPO ?= github.com/convoyinc/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION ?= 1.5.7
 
@@ -10,16 +10,17 @@ export TERRAFORM_VERSION ?= 1.5.7
 # licensed under BSL, which is not permitted.
 TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
 
-export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/null
-export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-null
-export TERRAFORM_PROVIDER_VERSION ?= 3.2.2
-export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-null
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://releases.hashicorp.com/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-null_v3.1.0_x5
+export TERRAFORM_PROVIDER_SOURCE ?= redpanda-data/redpanda
+export TERRAFORM_PROVIDER_REPO ?= https://github.com/redpanda-data/terraform-provider-redpanda
+export TERRAFORM_PROVIDER_VERSION ?= 0.15.1
+export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-redpanda
+# export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://releases.hashicorp.com/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/redpanda-data/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-redpanda_v0.15.1
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
-
-PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORM := linux_amd64
+PLATFORMS ?= linux_amd64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
@@ -55,7 +56,7 @@ GO_SUBDIRS += cmd internal apis
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.15.0
-UP_VERSION = v0.39.0
+UP_VERSION = v0.28.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.5.0
 -include build/makelib/k8s_tools.mk
@@ -63,17 +64,17 @@ UPTEST_VERSION = v0.5.0
 # ====================================================================================
 # Setup Images
 
-REGISTRY_ORGS ?= ghcr.io/crossplane-contrib
+REGISTRY_ORGS ?= 699536110035.dkr.ecr.us-west-2.amazonaws.com/convoyinc/kafka-infrastructure
 IMAGES = $(PROJECT_NAME)
 -include build/makelib/imagelight.mk
 
 # ====================================================================================
 # Setup XPKG
 
-XPKG_REG_ORGS ?= ghcr.io/crossplane-contrib
+XPKG_REG_ORGS ?= 699536110035.dkr.ecr.us-west-2.amazonaws.com/convoyinc/kafka-infrastructure
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
-XPKG_REG_ORGS_NO_PROMOTE ?= ghcr.io/crossplane-contrib
+XPKG_REG_ORGS_NO_PROMOTE ?= 699536110035.dkr.ecr.us-west-2.amazonaws.com/convoyinc/kafka-infrastructure
 XPKGS = $(PROJECT_NAME)
 -include build/makelib/xpkg.mk
 
@@ -93,7 +94,7 @@ fallthrough: submodules
 
 # NOTE(hasheddan): we force image building to happen prior to xpkg build so that
 # we ensure image is present in daemon.
-xpkg.build.upjet-provider-template: do.build.images
+xpkg.build.provider-redpanda: do.build.images
 
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
@@ -148,9 +149,6 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 # its location in CI so that we cache between builds.
 go.cachedir:
 	@go env GOCACHE
-
-go.mod.cachedir:
-	@go env GOMODCACHE
 
 # Generate a coverage report for cobertura applying exclusions on
 # - generated file

@@ -10,12 +10,15 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/upjet-provider-template/config/null"
+	acl "github.com/convoyinc/provider-redpanda/config/acl"
+	cluster "github.com/convoyinc/provider-redpanda/config/cluster"
+	topic "github.com/convoyinc/provider-redpanda/config/topic"
+	user "github.com/convoyinc/provider-redpanda/config/user"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/upbound/upjet-provider-template"
+	resourcePrefix = "redpanda"
+	modulePath     = "github.com/convoyinc/provider-redpanda"
 )
 
 //go:embed schema.json
@@ -27,7 +30,7 @@ var providerMetadata string
 // GetProvider returns provider configuration
 func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithRootGroup("template.upbound.io"),
+		ujconfig.WithRootGroup("convoy.com"),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithDefaultResourceOptions(
@@ -36,7 +39,10 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		acl.Configure,
+		cluster.Configure,
+		topic.Configure,
+		user.Configure,
 	} {
 		configure(pc)
 	}

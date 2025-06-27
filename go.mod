@@ -1,4 +1,4 @@
-module github.com/upbound/upjet-provider-template
+module github.com/convoyinc/provider-redpanda
 
 go 1.21
 
