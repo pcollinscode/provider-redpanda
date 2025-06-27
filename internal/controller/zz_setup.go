@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	acl "github.com/convoyinc/provider-redpanda/internal/controller/acl/acl"
-	cluster "github.com/convoyinc/provider-redpanda/internal/controller/cluster/cluster"
-	providerconfig "github.com/convoyinc/provider-redpanda/internal/controller/providerconfig"
-	topic "github.com/convoyinc/provider-redpanda/internal/controller/topic/topic"
-	user "github.com/convoyinc/provider-redpanda/internal/controller/user/user"
+	acl "github.com/pcollinscode/provider-redpanda/internal/controller/acl/acl"
+	cluster "github.com/pcollinscode/provider-redpanda/internal/controller/cluster/cluster"
+	providerconfig "github.com/pcollinscode/provider-redpanda/internal/controller/providerconfig"
+	topic "github.com/pcollinscode/provider-redpanda/internal/controller/topic/topic"
+	user "github.com/pcollinscode/provider-redpanda/internal/controller/user/user"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to

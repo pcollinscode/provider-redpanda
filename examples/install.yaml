@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-redpanda
 spec:
-  package: convoyinc/provider-redpanda:v0.1.0
+  package: pcollinscode/provider-redpanda:v0.1.0

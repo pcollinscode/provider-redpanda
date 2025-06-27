@@ -31,12 +31,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 
-	"github.com/convoyinc/provider-redpanda/apis"
-	"github.com/convoyinc/provider-redpanda/apis/v1alpha1"
-	"github.com/convoyinc/provider-redpanda/config"
-	"github.com/convoyinc/provider-redpanda/internal/clients"
-	"github.com/convoyinc/provider-redpanda/internal/controller"
-	"github.com/convoyinc/provider-redpanda/internal/features"
+	"github.com/pcollinscode/provider-redpanda/apis"
+	"github.com/pcollinscode/provider-redpanda/apis/v1alpha1"
+	"github.com/pcollinscode/provider-redpanda/config"
+	"github.com/pcollinscode/provider-redpanda/internal/clients"
+	"github.com/pcollinscode/provider-redpanda/internal/controller"
+	"github.com/pcollinscode/provider-redpanda/internal/features"
 )
 
 func main() {

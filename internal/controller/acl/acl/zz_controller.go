@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/convoyinc/provider-redpanda/apis/acl/v1alpha1"
-	features "github.com/convoyinc/provider-redpanda/internal/features"
+	v1alpha1 "github.com/pcollinscode/provider-redpanda/apis/acl/v1alpha1"
+	features "github.com/pcollinscode/provider-redpanda/internal/features"
 )
 
 // Setup adds a controller that reconciles ACL managed resources.

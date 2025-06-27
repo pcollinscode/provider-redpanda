@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: providerconfigs.redpanda.convoy.com
+  name: providerconfigs.redpanda.pcollinscode.com
 spec:
-  group: redpanda.convoy.com
+  group: redpanda.pcollinscode.com
   names:
     categories:
     - crossplane

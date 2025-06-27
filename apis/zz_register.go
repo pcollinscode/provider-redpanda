@@ -10,12 +10,12 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/convoyinc/provider-redpanda/apis/acl/v1alpha1"
-	v1alpha1cluster "github.com/convoyinc/provider-redpanda/apis/cluster/v1alpha1"
-	v1alpha1topic "github.com/convoyinc/provider-redpanda/apis/topic/v1alpha1"
-	v1alpha1user "github.com/convoyinc/provider-redpanda/apis/user/v1alpha1"
-	v1alpha1apis "github.com/convoyinc/provider-redpanda/apis/v1alpha1"
-	v1beta1 "github.com/convoyinc/provider-redpanda/apis/v1beta1"
+	v1alpha1 "github.com/pcollinscode/provider-redpanda/apis/acl/v1alpha1"
+	v1alpha1cluster "github.com/pcollinscode/provider-redpanda/apis/cluster/v1alpha1"
+	v1alpha1topic "github.com/pcollinscode/provider-redpanda/apis/topic/v1alpha1"
+	v1alpha1user "github.com/pcollinscode/provider-redpanda/apis/user/v1alpha1"
+	v1alpha1apis "github.com/pcollinscode/provider-redpanda/apis/v1alpha1"
+	v1beta1 "github.com/pcollinscode/provider-redpanda/apis/v1beta1"
 )
 
 func init() {

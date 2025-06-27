@@ -10,7 +10,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = "topic"
 
 		r.References["cluster"] = config.Reference{
-			Type: "github.com/convoyinc/provider-redpanda/apis/repository/v1alpha1.Cluster",
+			Type: "github.com/pcollinscode/provider-redpanda/apis/repository/v1alpha1.Cluster",
 		}
 	})
 }

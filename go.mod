@@ -1,4 +1,4 @@
-module github.com/convoyinc/provider-redpanda
+module github.com/pcollinscode/provider-redpanda
 
 go 1.21
 

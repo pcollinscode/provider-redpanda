@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: acls.acl.convoy.com
+  name: acls.acl.pcollinscode.com
 spec:
-  group: acl.convoy.com
+  group: acl.pcollinscode.com
   names:
     categories:
     - crossplane

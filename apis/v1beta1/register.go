@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "redpanda.convoy.com"
+	Group   = "redpanda.pcollinscode.com"
 	Version = "v1beta1"
 )
 

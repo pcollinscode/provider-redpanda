@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/pipeline"
 
-	"github.com/convoyinc/provider-redpanda/config"
+	"github.com/pcollinscode/provider-redpanda/config"
 )
 
 func main() {
